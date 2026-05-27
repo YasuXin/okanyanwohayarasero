@@ -106,7 +106,7 @@ impl GameLoop {
 //-------------------------------------------------------
 // x軸とy軸を格納する構造体
 //-------------------------------------------------------
-#[derive(Clone, Copy, Default, Debug)]
+#[derive(Clone, Default, Debug)]
 pub struct Point {
 	pub x: f32,
 	pub y: f32
@@ -361,9 +361,7 @@ impl Audio {
 		let array_buffer = browser::fetch_array_buffer(filename).await?;
 		let audio_buffer = sound::decode_audio_data(&self.context, &array_buffer).await?;
 
-		Ok(Sound {
-			buffer: audio_buffer,
-		})
+		Ok( Sound { buffer: audio_buffer } )
 	}
 
 	// 効果音など、一度だけ音源を再生する
@@ -548,7 +546,7 @@ pub fn draw_modal_background(color_str: &str) {
 	context.fill();
 }
 
-pub fn draw_circle(color_str: &str, position: Point, radius: f32) {
+pub fn draw_circle(color_str: &str, position: &Point, radius: f32) {
 
 	let context = context().expect("context not initialized!");
 

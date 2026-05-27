@@ -106,7 +106,7 @@ impl Special for SpecialOkanyan {
 			180..330 => {
 				draw_circle(
 					"rgba(255, 255, 255, 0.5)",
-					self.context.center,
+					&self.context.center,
 					(( self.context.frame - 180 ) * 10 ) as f32
 				)
 			}
@@ -118,7 +118,7 @@ impl Special for SpecialOkanyan {
 			210..330 => {
 				draw_circle(
 					"rgba(100, 255, 100, 0.5)",
-					self.context.center,
+					&self.context.center,
 					(( self.context.frame - 210 ) * 15 ) as f32
 				)
 			}
@@ -130,7 +130,7 @@ impl Special for SpecialOkanyan {
 			240..330 => {
 				draw_circle(
 					"rgba(255, 255, 255, 0.8)",
-					self.context.center,
+					&self.context.center,
 					(( self.context.frame - 240 ) * 20 ) as f32
 				)
 			}
