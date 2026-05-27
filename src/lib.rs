@@ -9,7 +9,6 @@ mod enemy;
 mod player;
 mod game;
 mod beam;
-mod barrier;
 mod create_platform;
 mod create_enemy;
 mod enemy_rocket;

@@ -188,130 +188,129 @@ impl DataForPlaying {
 
 		let mut next_obstacles = match next_segment {
 			0 => platform_0(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			1 => platform_1(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
-			2 => platform_2(
-				self.sprite_sheets.obstacle_sheet.clone(),
+			2 => platform_2(Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			3 => platform_3(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			4 => platform_4(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			5 => platform_5(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			6 => platform_6(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			7 => platform_7(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			8 => platform_8(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			9 => platform_arms_0(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			10=> platform_arms_pillars_0(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			11 => platform_pillars_0(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			12 => platform_pillars_1(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			13 => moving_platform_0(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			14 => moving_platform_1(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			15 => moving_platform_2(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			16 => moving_platform_3(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			17 => moving_platform_4(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			18 => platform_bonus_0(
 				self.status.gravity,
 				self.status.time_line,
-				self.sprite_sheets.bonus_sheet.clone(),
-				self.sprite_sheets.obstacle_sheet.clone(),
-				[self.audio.clone()],
-				[self.sounds.enemy_defeated.clone()]
+				Rc::clone(&self.sprite_sheets.bonus_sheet),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
+				[Rc::clone(&self.audio)],
+				[Rc::clone(&self.sounds.enemy_defeated)]
 			),
 			19=> platform_10(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			20 => platform_11(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			21 => platform_12(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			22 => platform_13(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			23 => platform_14(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line,
 				self.status.height
 			),
 			24 => platform_15(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			25 => moving_platform_5(
-				self.sprite_sheets.obstacle_sheet.clone(),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
 				self.status.time_line
 			),
 			26 => platform_bonus_1(
 				self.status.gravity,
 				self.status.time_line,
-				self.sprite_sheets.bonus_sheet.clone(),
-				self.sprite_sheets.obstacle_sheet.clone(),
-				[self.audio.clone()],
-				[self.sounds.enemy_defeated.clone()]
+				Rc::clone(&self.sprite_sheets.bonus_sheet),
+				Rc::clone(&self.sprite_sheets.obstacle_sheet),
+				[Rc::clone(&self.audio)],
+				[Rc::clone(&self.sounds.enemy_defeated)]
 			),
 			_ => vec![]
 		};
@@ -331,17 +330,17 @@ impl DataForPlaying {
 
 			let mut next_enemy = match next {
 				0..30 => rocket_0(
-					self.sprite_sheets.enemies_sheet.clone(),
-					[self.audio.clone()],
-					[self.sounds.enemy_defeated.clone()],
+					Rc::clone(&self.sprite_sheets.enemies_sheet),
+					[Rc::clone(&self.audio)],
+					[Rc::clone(&self.sounds.enemy_defeated)],
 					self.player.moving_speed(),
 					self.status.width,
 					self.status.height,
 				),
 				30..60 => rocket_1(
-					self.sprite_sheets.enemies_sheet.clone(),
-					[self.audio.clone()],
-					[self.sounds.enemy_defeated.clone()],
+					Rc::clone(&self.sprite_sheets.enemies_sheet),
+					[Rc::clone(&self.audio)],
+					[Rc::clone(&self.sounds.enemy_defeated)],
 					self.player.moving_speed(),
 					self.status.width,
 					self.status.height,
@@ -355,9 +354,9 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							okayu_beam(
-								self.sprite_sheets.enemies_sheet.clone(),
-								[self.audio.clone()],
-								[self.sounds.enemy_beam.clone()],
+								Rc::clone(&self.sprite_sheets.enemies_sheet),
+								[Rc::clone(&self.audio)],
+								[Rc::clone(&self.sounds.enemy_beam)],
 								self.status.width,
 								self.status.height,
 							)
@@ -377,9 +376,9 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							okayu_energy(
-								self.sprite_sheets.enemies_sheet.clone(),
-								[self.audio.clone()],
-								[self.sounds.enemy_energy.clone()],
+								Rc::clone(&self.sprite_sheets.enemies_sheet),
+								[Rc::clone(&self.audio)],
+								[Rc::clone(&self.sounds.enemy_energy)],
 								self.status.width,
 								self.status.height,
 							)
@@ -403,12 +402,12 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							fubura(
-								self.sprite_sheets.fubura_sheet.clone(),
-								[self.audio.clone()],
+								Rc::clone(&self.sprite_sheets.fubura_sheet),
+								[Rc::clone(&self.audio)],
 								[
-									self.sounds.fubura_thunder.clone(),
-									self.sounds.fubura_wulf.clone(),
-									self.sounds.fubura_dogon.clone()
+									Rc::clone(&self.sounds.fubura_thunder),
+									Rc::clone(&self.sounds.fubura_wulf),
+									Rc::clone(&self.sounds.fubura_dogon)
 								],
 								self.status.width,
 								self.status.height,
@@ -423,7 +422,7 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							kedama(
-								self.sprite_sheets.kedama_sheet.clone(),
+								Rc::clone(&self.sprite_sheets.kedama_sheet),
 								self.status.height,
 							)
 						} else {
@@ -436,7 +435,7 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							kedama_r(
-								self.sprite_sheets.kedama_sheet.clone(),
+								Rc::clone(&self.sprite_sheets.kedama_sheet),
 								self.status.height,
 							)
 						} else {
@@ -449,13 +448,13 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							hato(
-								self.sprite_sheets.hato_sheet.clone(),
+								Rc::clone(&self.sprite_sheets.hato_sheet),
 								[
-									self.audio.clone()
+									Rc::clone(&self.audio)
 								],
 								[
-									self.sounds.fubura_thunder.clone(),
-									self.sounds.hato_eye.clone()
+									Rc::clone(&self.sounds.fubura_thunder),
+									Rc::clone(&self.sounds.hato_eye)
 								],
 								self.status.width,
 								self.status.height,
@@ -470,7 +469,7 @@ impl DataForPlaying {
 							_ => false,
 						}) {
 							pokobe(
-								self.sprite_sheets.kedama_sheet.clone(),
+								Rc::clone(&self.sprite_sheets.kedama_sheet),
 								self.status.width,
 								self.status.height,
 							)
@@ -495,9 +494,9 @@ impl DataForPlaying {
 			let mut new_balloon = match next_balloon {
 				0 => vec!(
 					Balloon::new(
-						self.sprite_sheets.bonus_sheet.clone(),
-						[self.audio.clone()],
-						[self.sounds.bonus.clone()],
+						Rc::clone(&self.sprite_sheets.bonus_sheet),
+						[Rc::clone(&self.audio)],
+						[Rc::clone(&self.sounds.bonus)],
 						self.status.width,
 						self.status.height,
 					)
@@ -512,13 +511,13 @@ impl DataForPlaying {
 	pub fn reset(self, start_velocity_x: f32) -> Self {
 
 		let starting_obstacles = start_platform(
-			self.sprite_sheets.obstacle_sheet.clone(),
+			Rc::clone(&self.sprite_sheets.obstacle_sheet),
 			0.0,
 			self.status.height
 		);
 
 		let starting_checker = start_platform_bg(
-			self.sprite_sheets.obstacle_sheet.clone(),
+			Rc::clone(&self.sprite_sheets.obstacle_sheet),
 			0.0
 		);
 

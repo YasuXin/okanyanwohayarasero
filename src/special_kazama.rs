@@ -1,6 +1,5 @@
 use std::rc::Rc;
-use web_sys::HtmlImageElement;
-use crate::engine::{draw_modal_background, Audio, Cell, Image, Point, Rect, Renderer, Sheet, Sound};
+use crate::engine::{draw_modal_background, Audio, Cell, Image, Point, Rect, Renderer, Sound, SpriteSheet};
 use crate::special::{Special, SpecialContext};
 
 #[derive(Debug)]
@@ -23,8 +22,7 @@ pub struct SpecialKazama {
 	velocity_x: f32,
 	context: SpecialContext,
 	images: [Image; 5],
-	sheet: Sheet,
-	sprite_sheet_image: HtmlImageElement,
+	sheet: Rc<SpriteSheet>,
 	sounds: KazamaSounds,
 	def: bool,
 }
@@ -160,11 +158,9 @@ impl Special for SpecialKazama {
 }
 
 impl SpecialKazama {
-
 	pub fn new (
 		images: [Image; 5],
-		sheet: Sheet,
-		sprite_sheet_image: HtmlImageElement,
+		sheet: Rc<SpriteSheet>,
 		center: Point,
 		audio: Rc<Audio>,
 		sounds: KazamaSounds,
@@ -188,7 +184,6 @@ impl SpecialKazama {
 			},
 			images,
 			sheet,
-			sprite_sheet_image,
 			sounds,
 			def,
 			velocity_x: 80.0
@@ -196,12 +191,12 @@ impl SpecialKazama {
 	}
 
 	fn current_sprite(&self, frame_name: &str) -> Option<&Cell> {
-		self.sheet.frames.get(frame_name)
+		self.sheet.sheet.frames.get(frame_name)
 	}
 
 	pub fn render_image(&self, renderer: &Renderer, sprite: &Cell) {
 		renderer.draw_image(
-			&self.sprite_sheet_image,
+			&self.sheet.image,
 			&Rect::new(
 				Point {
 					x: sprite.frame.x.into(),

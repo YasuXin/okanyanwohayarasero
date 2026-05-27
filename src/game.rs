@@ -111,10 +111,14 @@ impl Game for FlyingOkanyan {
 
 				// 音楽データ読み込み
 				let audio = Rc::new(Audio::new()?);
+
+				// プレイヤーが使用する音楽データ
 				let fly = Rc::new(audio.load_sound(FLY_SE).await.expect("Failed to load flying sound"));
 				let slash = Rc::new(audio.load_sound(SLASH_SE).await.expect("Failed to load slash sound"));
 				let energy = Rc::new(audio.load_sound(BEAM_SE).await.expect("Failed to load beam sound"));
 				let fail = Rc::new(audio.load_sound(FAIL_SE).await.expect("Failed to load fail sound"));
+
+				// それ以外の音楽データ
 				let decision = Rc::new(audio.load_sound(DECISION_SE).await.expect("Failed to load decision sound"));
 				let enemy_beam = Rc::new(audio.load_sound(ENEMY_BEAM_SE).await.expect("Failed to load enemy beam sound"));
 				let enemy_defeated = Rc::new(audio.load_sound(ENEMY_DEFEATED_SE).await.expect("Failed to load enemy defeated sound"));
@@ -162,7 +166,7 @@ impl Game for FlyingOkanyan {
 					engine::load_image(PLAYER_IMAGE)
 						.await
 						.expect("player_sheet.png does not exists"),
-					audio.clone(),
+					Rc::clone(&audio),
 					sounds
 				);
 
@@ -963,17 +967,16 @@ impl GameState<Playing> {
 					Box::new(
 						SpecialKazama::new(
 							self.data_for_playing.special_images.kazama.clone(),
-							self.data_for_playing.sprite_sheets.kazama_sheet.sheet.clone(),
-							self.data_for_playing.sprite_sheets.kazama_sheet.image.clone(),
+							Rc::clone(&self.data_for_playing.sprite_sheets.kazama_sheet),
 							Point {
 								x: self.data_for_playing.status.width / 2.0,
 								y: self.data_for_playing.status.height / 2.0,
 							},
-							self.data_for_playing.audio.clone(),
+							Rc::clone(&self.data_for_playing.audio),
 							KazamaSounds::new(
-								self.data_for_playing.sounds.special_koto.clone(),
-								self.data_for_playing.sounds.special_sword_0.clone(),
-								self.data_for_playing.sounds.special_sword_1.clone()
+								Rc::clone(&self.data_for_playing.sounds.special_koto),
+								Rc::clone(&self.data_for_playing.sounds.special_sword_0),
+								Rc::clone(&self.data_for_playing.sounds.special_sword_1)
 							),
 							is_def
 						)
@@ -989,10 +992,10 @@ impl GameState<Playing> {
 								x: self.data_for_playing.status.width / 2.0,
 								y: self.data_for_playing.status.height / 2.0
 							},
-							self.data_for_playing.audio.clone(),
+							Rc::clone(&self.data_for_playing.audio),
 							OkanyanSounds::new(
-								self.data_for_playing.sounds.special.clone(),
-								self.data_for_playing.sounds.special_energy.clone()
+								Rc::clone(&self.data_for_playing.sounds.special),
+								Rc::clone(&self.data_for_playing.sounds.special_energy)
 							)
 						)
 					)
