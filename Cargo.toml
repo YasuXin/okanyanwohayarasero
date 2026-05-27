@@ -1,0 +1,44 @@
+[package]
+name = "rust-webpack-template"
+description = "My super awesome Rust, WebAssembly, and Webpack project!"
+version = "0.1.0"
+authors = ["You <you@example.com>"]
+categories = ["wasm"]
+readme = "README.md"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codgen-units = 1
+panic = "unwind"
+
+[features]
+#default = ["wee_alloc"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.92", features = ["serde-serialize"] }
+console_error_panic_hook = "0.1.7"
+getrandom = { version = "0.2.3", features = ["js"]}
+#wee_alloc = { version = "0.4.2", optional = true }
+rand = { version = "0.8", features = ["std", "small_rng"] }
+futures = "0.3.17"
+wasm-bindgen-futures = "0.4.28"
+serde = { version = "1.0.131", features = ["derive"]}
+serde-wasm-bindgen = "0.6"
+anyhow = "1.0.51"
+async-trait = "0.1.52"
+tokio = { version = "1.52.1", features = ["sync"] }
+js-sys = "0.3.55"
+
+[dependencies.web-sys]
+version = "0.3.69"
+features = ["console", "Window", "Document", "Element", "HtmlCanvasElement", "CanvasRenderingContext2d", "HtmlImageElement", "Response", "Performance", "KeyboardEvent", "AudioContext", "AudioBuffer", "AudioBufferSourceNode", "AudioDestinationNode", "AudioBufferOptions", "AudioContextState", "HtmlCollection"]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.28"
+js-sys = "0.3.55"
+wasm-bindgen-futures = "0.4.28"

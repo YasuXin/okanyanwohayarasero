@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>おかにゃんは流行らないし流行らせない？</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dela+Gothic+One&family=Fjalla+One&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Jersey+25&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Knewave&family=Kosugi+Maru&family=Noto+Sans+JP:wght@100..900&family=Potta+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Knewave&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="bg-blend-area">
+            <div style="width: 100%; height: 100%; display: flex;justify-content: center; align-items: center; flex-direction: column">
+                <h2 class="potta">ロード中...</h2>
+                <h2 class="potta">ちょっと待ってな</h2>
+            </div>
+        </div>
+
+        <div id="canvas-area">
+            <canvas id="canvas" tabindex="0" width="1200" height="560">
+                Your Browser does not support th canvas.
+            </canvas>
+
+            <div id="title-area" class="hidden">
+                <h1 id="title" class="potta">
+                    おかにゃんを<br>流行らせろ！
+                </h1>
+                <h2 class="press_space potta">Spaceキーでスタート!</h2>
+                <h3 class="potta">→キーで遊び方を見る</h3>
+            </div>
+
+            <div id="game-over-area" class="hidden">
+                <div id='back-to-title'>
+                    <h1>GAME OVER</h1>
+                    <div>Spaceキーでタイトル画面に戻る</div>
+                </div>
+            </div>
+
+            <div id="right-top-area" class="hidden">
+                <div id="score">
+                    <div id="score-left" class="bebas-neue-regular">SUB : </div>
+                    <div id="score-right" class="bebas-neue-regular"></div>
+                </div>
+                <div id="special-energy">
+                    <div id="special-energy-left" class="bebas-neue-regular">ENR : </div>
+                    <div id="special-energy-right">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="explain-area" class="hidden">
+            <div id="explain">
+                <div style="display: flex;">
+                    <div style="
+                    border: 2px solid black;
+                    border-radius: 10px;
+                    padding: 5px 10px;
+                    box-shadow: 1px 1px 1px 1px rgba(0, 60, 60, 0.5);
+                    ">
+                        <b>←キーで戻ります</b>
+                    </div>
+                </div>
+                <h2>このゲームについて</h2>
+                <div class="explain_box">
+                    <p>ワイ（愛らしいおかにゃん）は今日も飛んでいるだけで人気者や。
+                        チャンネル登録者がどんどん増えていくオイニーがぷんぷんするで。</p>
+                    <p>でもそんなぼくを邪魔しようとするアンチがおるんやで。
+                        アンチの攻撃をよけながらチャンネル登録者を増やすんや！</p>
+                </div>
+
+                <h2>操作方法</h2>
+                <div class="explain_box">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td class="explain_left">↑キー：</td>
+                            <td class="explain_center">ジャンプ</td>
+                            <td>他のキーを押せばジャンプをキャンセルできるで。</td>
+                        </tr>
+                        <tr>
+                            <td class="explain_left">←キー：</td>
+                            <td class="explain_center">バリア</td>
+                            <td>エネルギーゲージを<b>50</b>消費して一定時間<b>無敵</b>状態になるで。無敵中は<b>ホバリング</b>状態になるんや。</td>
+                        </tr>
+                        <tr>
+                            <td class="explain_left">→キー：</td>
+                            <td class="explain_center">ビーム発射</td>
+                            <td>エネルギーゲージを<b>20</b>消費してビームを発射や。発射中は<b>ホバリング</b>状態になるんや。</td>
+                        </tr>
+                        <tr>
+                            <td class="explain_left">↓キー：</td>
+                            <td class="explain_center">回転斬り</td>
+                            <td>回転斬りして特定の敵を破壊するで。回転斬り中は<b>ホバリング</b>状態になるんや。</td>
+                        </tr>
+                        <tr>
+                            <td class="explain_left">Spaceキー：</td>
+                            <td class="explain_center">必殺技</td>
+                            <td>エネルギーゲージを<b>100</b>消費して潜在能力を開放するで。たまにマーちゃんが誤召喚されるんや。<s style="font-size: 0.6rem">クンカクンカ</s></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <p>それ以外ではワイは自由落下するんや。各コマンドを組み合わせて上手に遊ぶんやで。</p>
+                </div>
+
+                <h2>ルール</h2>
+                <div class="explain_box">
+                    <p>ゲームが始まると自動的に右方向にスクロールするんや。時間経過とともにスクロール速度が上がっていくで。</p>
+                    <p>特定の敵キャラクターやアンチが放ったビームに当たったり、地形にぶつかったりするとゲームオーバーになるで。</p>
+                    <p>右上に表示されている「SUB」はチャンネル登録者（スコア）で、「ENR」は技を出すためのエネルギーゲージや。</p>
+                    <p>ゲームが始まるとチャンネル登録者とエネルギーゲージは増加していくで。ただし、エネルギーゲージは最大値が<b>100</b>で、それ以上は増えないんや。</p>
+                    <p>技を出すとき、消費エネルギー分エネルギーゲージが溜まってない場合は技が出ないから注意してや。</p>
+                </div>
+
+                <h2>キャラクター</h2>
+                <div class="explain_box">
+                    <div class="explain_grid">
+                        <div>
+                            <h4>おにぎり型ロケット</h4>
+                            <img src="explain_onigirya.png" alt="おにぎり型ロケット">
+                            <p>アンチが放ったとされるロケットや。右か、下から飛んでて来るで。おにぎりゃーではないんや。
+                                回転斬りかビームか必殺技で壊せるで。<b style="color:red">壊したらチャンネル登録者が少し減るんや</b>。
+                                当たったらゲームオーバーや。</p>
+                        </div>
+
+                        <div>
+                            <h4>アンチ</h4>
+                            <img src="explain_okayu.png" alt="アンチ" height="200">
+                            <p>「おかにゃんは流行らないし、流行らせない」言うてはった人と思うで。いつになく怒ってはるわ。
+                                おかビームとエネルギー弾を発射してくるで。おかビームとエネルギー弾は必殺技で消せるで。
+                                <b style="color:red">消したらチャンネル登録者が少し減るんや。</b>当たったらもちろんゲームオーバーや。</p>
+                        </div>
+
+                        <div>
+                            <h4>フブラ</h4>
+                            <img src="explain_fubura.png" alt="フブラ" height="200">
+                            <p>怪獣。当たってもダメージはないが、前を横切るから邪魔やねん。悪気はないから堪忍な。必殺技で消せるで。</p>
+                        </div>
+
+                        <div>
+                            <h4>ころさん</h4>
+                            <img src="explain_kedama.png" alt="毛玉" height="150">
+                            <p>カメラをぺろぺろなめてくる毛玉や。当たってもダメージはないけど邪魔やねん。悪気はないから堪忍な。必殺技で消せるで。</p>
+                        </div>
+
+                        <div>
+                            <h4>ハトタウロス</h4>
+                            <img src="explain_hato.png" alt="ハトタウロス" width="200">
+                            <p>怪獣か、スタンド的存在。とりあえず出てきて帰っていくんや。必殺技で消せるで。</p>
+                        </div>
+
+                        <div>
+                            <h4>ぽこべぇ</h4>
+                            <img src="explain_pokobe.png" alt="ぽこべぇ" height="150">
+                            <p>ちょこっと出てくるで。この子は消せないんや。</p>
+                        </div>
+
+                        <div>
+                            <h4>風船</h4>
+                            <img src="explain_balloon.png" alt="風船">
+                            <p>ビームか必殺技で壊せる風船や。壊したらチャンネル登録者が増えるで。</p>
+                        </div>
+
+                        <div>
+                            <h4>木箱</h4>
+                            <img src="explain_wood_box.png" alt="木箱">
+                            <p>道をふさいでいる木箱や。ビームか必殺技で壊せるで。壊したらチャンネル登録者が増えるで。</p>
+                        </div>
+
+                        <div>
+                            <h4>マーちゃん</h4>
+                            <img src="explain_kazama.png" alt="マーちゃん" height="150">
+                            <p>ワイの相棒（？）や。必殺技を使うと時々出てくるで。大困惑でござ</p>
+                        </div>
+
+                        <div>
+                            <h4>ワイ</h4>
+                            <img src="explain_wai.png" alt="ワイ" height="150">
+                            <p>ワイ。<br>カワイイ！</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <h2>豆知識</h2>
+                <div class="explain_box">
+                    <ul>
+                        <li><p>回転斬りとかでホバリング状態になると、一時的に縦方向の移動速度が0になるんやが、
+                            タイミングよくボタンを押すことで長時間ホバリング状態が維持できるで。</p></li>
+                        <li><p>ジャンプ中にもう一度ジャンプはできないんやが、
+                            ジャンプ中にビームを発射した後すぐにまたジャンプすると素早く高くジャンプできるで。</p></li>
+                        <li><p>アンチが右から出てくる前にはちょこっと手だけ見せるんや。画面の右端をチェックしながらプレイしてや。</p></li>
+                        <li><p>アンチが手だけ出しとるときに必殺技を使うとおかビームが不発になるんや。ピンチの時には必殺技や。</p></li>
+                        <li><p>左キーを押すと無敵状態になるんやが、無敵状態では敵のロケットやビームでダメージを受けなくなるんや。
+                            でも地形にぶつかるとゲームオーバーになるから気ぃつけや。</p></li>
+                        <li><p>ワイの腕には第四関節があるんや</p></li>
+                        <li><p>アンチの人がワイのこと「キモイ」とか「ブキミ」とか言ってはったらしいんやけど、どういう意味なんやろか？</p></li>
+                    </ul>
+                </div>
+
+                <h2>作者からコメント</h2>
+                <div class="explain_box">
+                    <p>このゲームは個人が作ったファンゲームであって、ホロライブ公式とは一切関係ありません。</p>
+                    <p>Rust・WebAssemblyの練習として作成しました。</p>
+                    <p style="text-align: right"><small>猫又おかゆさん、アンチなんて言ってごめんなさい🙇</small></p>
+                </div>
+
+                <h2>SPECIAL THANKS</h2>
+                <div class="explain_box">
+                    <p>効果音　:　効果音ラボ様　　URL　:　<a href="https://soundeffect-lab.info/" target="_blank">https://soundeffect-lab.info/</a></p>
+                    <p>音楽　:　甘茶の音楽工房様　　URL　:　<a href="https://amachamusic.chagasi.com/" target="_blank">https://amachamusic.chagasi.com/</a></p>
+                    <p>一部イラスト　：　いらすとや様　　URL　：　<a href="https://www.irasutoya.com/" target="_blank">https://www.irasutoya.com/</a></p>
+                    <p>※このゲームは個人が作ったファンゲームであって、ホロライブ公式とは一切関係ありません</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let el = document.getElementById("canvas-area");
+            let width = window.innerWidth
+            let height = window.innerHeight
+
+            if (width * 560 >= height * 1200) {
+                el.style.transform ='scale(' + ( height - 10 ) / 560.0 + ')'
+            } else {
+                el.style.transform ='scale(' + ( width ) / 1200.0 + ')'
+            }
+
+            window.addEventListener('resize', () => {
+                let width = window.innerWidth
+                let height = window.innerHeight
+
+                if (width * 560 >= height * 1200) {
+                    el.style.transform ='scale(' + ( height - 10 ) / 560.0 + ')'
+                } else {
+                    el.style.transform ='scale(' + ( width ) / 1200.0 + ')'
+                }
+            })
+
+        </script>
+
+        <script src="/index.js"></script>
+
+    </body>
+</html>
