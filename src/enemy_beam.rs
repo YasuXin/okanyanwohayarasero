@@ -232,7 +232,12 @@ impl EnemyState<Live> {
 			}
 
 			if self.context.frame >= 351 {
-				LiveEndState::Complete(self.be_defeated(player))
+				if self.context.frame % 2 == 0 {
+					LiveEndState::Complete(self.be_defeated(player))
+				} else {
+					LiveEndState::Continue(self)
+				}
+				
 			} else {
 				LiveEndState::Continue(self)
 			}

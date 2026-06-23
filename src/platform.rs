@@ -77,8 +77,10 @@ impl Obstacle for Platform {
 	fn update(&mut self, x: f32, player: &mut Player, _beams: &mut Vec<Beam>) {
 
 		self.move_horizontally(x);
-		
-		self.check_intersection(player);
+
+		if self.kinds_machine.context().frame % 2 == 0 {
+			self.check_intersection(player);
+		}
 
 		self.kinds_machine = self.kinds_machine.clone().update();
 	}

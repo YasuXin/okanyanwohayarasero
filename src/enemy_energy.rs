@@ -209,8 +209,10 @@ impl EnemyState<Live> {
 				self.context.position.y += self.context.velocity.y;
 				self.context.center.x += self.context.velocity.x;
 				self.context.center.y += self.context.velocity.y;
-
-				self.check_intersection(player);
+				
+				if self.context.frame% 2 == 0 {
+					self.check_intersection(player);
+				}
 			}
 			
 			LiveEndState::Continue(self)

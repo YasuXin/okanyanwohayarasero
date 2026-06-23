@@ -303,7 +303,11 @@ impl EnemyState<Live> {
 			self.context.center.x += self.context.velocity.x;
 			self.context.center.y += self.context.velocity.y;
 
-			self.check_intersection(player, beams)
+			if self.context.frame % 2 == 0 {
+				self.check_intersection(player, beams)
+			} else {
+				LiveEndState::Continue(self)
+			}
 		}
 	}
 }

@@ -320,7 +320,7 @@ impl BonusState<Live> {
 		} else {
 			self.context.frame += 1;
 
-			if self.check_defeat(beams) {
+			if self.context.frame % 2 == 0 && self.check_defeat(beams) {
 				self.context.defeated = true;
 				LiveEndState::Complete(self.be_defeated(player))
 			} else {
