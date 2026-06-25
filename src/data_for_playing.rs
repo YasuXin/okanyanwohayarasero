@@ -11,13 +11,13 @@ use crate::player::Player;
 use crate::segment::{moving_platform_0, moving_platform_1, moving_platform_2, moving_platform_3, moving_platform_4, moving_platform_5, platform_0, platform_1, platform_10, platform_11, platform_12, platform_13, platform_14, platform_15, platform_2, platform_3, platform_4, platform_5, platform_6, platform_7, platform_8, platform_arms_0, platform_arms_pillars_0, platform_bonus_0, platform_bonus_1, platform_pillars_0, platform_pillars_1, start_platform, start_platform_bg};
 use crate::special::Special;
 
-#[derive(Debug)]
+/*#[derive(Debug)]
 pub struct BGMs {
 	pub current_audio: Option<Audio>,
 	pub _current_sound: Option<Sound>,
 	pub playing_audio: Audio,
 	pub _playing_sound: Sound,
-}
+}*/
 #[derive(Debug)]
 pub struct GameSounds {
 	pub decision: Rc<Sound>,
@@ -90,7 +90,7 @@ pub struct DataForPlaying {
 	pub beams: Vec<Beam>,
 	pub audio: Rc<Audio>,
 	pub sounds: GameSounds,
-	pub bgm: BGMs,
+	//pub bgm: BGMs,
 }
 
 impl DataForPlaying {
@@ -549,7 +549,7 @@ impl DataForPlaying {
 			objects: vec!(),
 			audio: self.audio,
 			sounds: self.sounds,
-			bgm: self.bgm,
+			//bgm: self.bgm,
 		}
 	}
 

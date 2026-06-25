@@ -36,7 +36,7 @@ js-sys = "0.3.55"
 
 [dependencies.web-sys]
 version = "0.3.69"
-features = ["console", "Window", "Document", "Element", "HtmlCanvasElement", "CanvasRenderingContext2d", "HtmlImageElement", "Response", "Performance", "KeyboardEvent", "AudioContext", "AudioBuffer", "AudioBufferSourceNode", "AudioDestinationNode", "AudioBufferOptions", "AudioContextState", "HtmlCollection"]
+features = ["console", "Window", "Document", "Element", "HtmlCanvasElement", "CanvasRenderingContext2d", "HtmlImageElement", "Response", "Performance", "KeyboardEvent", "AudioContext", "AudioBuffer", "AudioBufferSourceNode", "AudioDestinationNode", "AudioBufferOptions", "AudioContextState", "HtmlCollection", "HtmlAudioElement"]
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.28"

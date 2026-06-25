@@ -1,8 +1,10 @@
 use anyhow::anyhow;
-use wasm_bindgen::{JsCast};
+use wasm_bindgen::{JsCast, JsValue};
 use web_sys::{AudioBuffer, AudioBufferSourceNode, AudioContext, AudioDestinationNode, AudioNode};
 use js_sys::ArrayBuffer;
 use js_sys::futures::JsFuture;
+use wasm_bindgen::prelude::wasm_bindgen;
+use crate::browser;
 
 pub fn create_audio_context() -> Result<AudioContext, anyhow::Error> {
 	AudioContext::new().map_err(|err| {
@@ -35,22 +37,21 @@ fn create_track_source(
 
 	Ok(track_source)
 }
-
+/*
 pub enum LOOPING {
 	NO,
 	YES
-}
+}*/
 
 pub fn play_sound(
 	ctx: &AudioContext,
 	buffer: &AudioBuffer,
-	looping: LOOPING
 ) -> Result<(), anyhow::Error> {
 	let track_source = create_track_source(ctx, buffer)?;
 
-	if matches!(looping, LOOPING::YES) {
+	/*if matches!(looping, LOOPING::YES) {
 		track_source.set_loop(true);
-	}
+	}*/
 
 	track_source
 		.start_with_when(0.0)
@@ -70,4 +71,39 @@ pub async fn decode_audio_data(
 		.map_err(|err| anyhow!("sound : decode_audio_data() : Error convert promise to future {:#?}", err))?
 		.dyn_into::<AudioBuffer>()
 		.map_err(|err| anyhow!("sound : decode_audio_data() : Could not cast into AudioBuffer: {:?}", err))
+}
+
+#[wasm_bindgen]
+pub fn play_audio_js(audio_class_name: &str) -> Result<(), JsValue> {
+	let document = browser::document().expect("failed to get browser document");
+
+	let element = document.get_elements_by_class_name(audio_class_name).get_with_index(0).expect("no node has class_name");
+	let cloned_element = element.clone_node()?;
+
+	let audios_element = document.get_element_by_id("audios").unwrap();
+
+	let _ = audios_element.append_child(cloned_element.as_ref())?;
+
+	let audio_element = cloned_element.dyn_into::<web_sys::HtmlAudioElement>()?;
+
+	let _ = audio_element.play()?;
+
+	Ok(())
+}
+
+#[wasm_bindgen]
+pub fn delete_audio_js(audio_class_name: &str) -> Result<(), JsValue> {
+	let document = browser::document().expect("failed to get browser document");
+
+	let audios_element = document.get_element_by_id("audios").unwrap();
+	let element = audios_element.get_elements_by_class_name(audio_class_name);
+
+	for i in 0..element.length() {
+
+		if let Some(item) = element.item(i) {
+			let _ = audios_element.remove_child(&item);
+		}
+	}
+
+	Ok(())
 }

@@ -10,7 +10,7 @@ use tokio::sync::mpsc::{
 	UnboundedReceiver,
 	error::TryRecvError};
 use wasm_bindgen::{JsCast, JsValue};
-use web_sys::{AudioBuffer, AudioContext, AudioContextState, CanvasRenderingContext2d, HtmlImageElement};
+use web_sys::{AudioBuffer, AudioContext, CanvasRenderingContext2d, HtmlImageElement};
 use serde::Deserialize;
 use futures::channel::oneshot::channel;
 use futures::lock::Mutex;
@@ -366,25 +366,25 @@ impl Audio {
 
 	// 効果音など、一度だけ音源を再生する
 	pub fn play_sound(&self, sound: &Sound) -> Result<(), anyhow::Error> {
-		sound::play_sound(&self.context, &sound.buffer, sound::LOOPING::NO)
+		sound::play_sound(&self.context, &sound.buffer)
 	}
 
 	// BGMなど、繰り返し音源を再生する
-	pub fn play_looping_sound(&self, sound: &Sound) -> Result<(), anyhow::Error> {
+	/*pub fn play_looping_sound(&self, sound: &Sound) -> Result<(), anyhow::Error> {
 		sound::play_sound(&self.context, &sound.buffer, sound::LOOPING::YES)
-	}
+	}*/
 
 	// 一時停止した音源を再度再生します
-	pub fn resume_sound(&self) {
+	/*pub fn resume_sound(&self) {
 		if self.context.state() == AudioContextState::Suspended {
 			let _result = self.context.resume().expect("Couldn't resume sound");
 		}
-	}
+	}*/
 
 	// 音源を一時停止します
-	pub fn suspend_sound(&self) {
+	/*pub fn suspend_sound(&self) {
 		let _result = self.context.suspend().expect("Couldn't suspend sound");
-	}
+	}*/
 
 }
 
@@ -392,7 +392,6 @@ impl Audio {
 pub struct Sound {
 	pub buffer: AudioBuffer
 }
-
 
 //--------------------------------------------
 // キー入力処理

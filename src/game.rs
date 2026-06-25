@@ -16,7 +16,8 @@ use crate::segment::{start_platform, start_platform_bg};
 use wasm_bindgen::JsValue;
 use serde_wasm_bindgen;
 use crate::browser::get_canvas_width;
-use crate::data_for_playing::{BGMs, Backgrounds, DataForPlaying, GameSounds, SpecialImages, SpriteSheets, Status};
+use crate::data_for_playing::{Backgrounds, DataForPlaying, GameSounds, SpecialImages, SpriteSheets, Status};
+use crate::sound::{delete_audio_js, play_audio_js};
 use crate::special_kazama::{KazamaSounds, SpecialKazama};
 use crate::special_okanyan::{OkanyanSounds, SpecialOkanyan};
 
@@ -58,7 +59,7 @@ const KAZAMA_SLASH_2: &str = "kazama_slash_2.png";
 const KAZAMA_SLASH_3: &str = "kazama_slash_3.png";
 const KAZAMA_BG: &str = "kazama_bg.png";
 
-const BGM_PLAYING: &str = "bgm_1.mp3";
+//const BGM_PLAYING: &str = "bgm_1.mp3";
 
 const FLY_SE: &str = "fly.mp3";
 const SLASH_SE: &str = "slash.mp3";
@@ -141,16 +142,16 @@ impl Game for FlyingOkanyan {
 				};
 
 				//
-				let playing_audio = Audio::new()?;
-				let playing_sound = playing_audio.load_sound(BGM_PLAYING).await.expect("Failed to load background sound");
-
+				//let playing_audio = Audio::new()?;
+				//let playing_sound = playing_audio.load_sound(BGM_PLAYING).await.expect("Failed to load background sound");
+/*
 				let bgm = BGMs {
 					current_audio: None,
 					_current_sound: None,
 					playing_audio,
 					_playing_sound: playing_sound,
 				};
-
+*/
 				let player_json: JsValue = browser::fetch_json(PLAYER_JSON)
 					.await
 					.expect("player_sheet.json does not exists");
@@ -496,7 +497,7 @@ impl Game for FlyingOkanyan {
 						objects: Vec::new(),
 						audio,
 						sounds,
-						bgm,
+						//bgm,
 					}
 				);
 
@@ -626,34 +627,11 @@ impl GameState<Title> {
 		}
 	}
 	
-	fn start_move(mut self) -> GameState<Playing> {
+	fn start_move(self) -> GameState<Playing> {
 
 		self.data_for_playing.play_decision_sound();
 
-		if self.data_for_playing.bgm.current_audio.is_none() &&
-			self.data_for_playing.bgm._current_sound.is_none() {
-
-			self.data_for_playing.bgm.current_audio = Some(self.data_for_playing.bgm.playing_audio.clone());
-			self.data_for_playing.bgm._current_sound = Some(self.data_for_playing.bgm._playing_sound.clone());
-
-			if let Some(audio) = self.data_for_playing.bgm.current_audio.take() &&
-				let Some(sound) = self.data_for_playing.bgm._current_sound.take() {
-
-				audio.play_looping_sound(&sound)
-					.expect("Error when playing sound");
-
-				self.data_for_playing.bgm.current_audio = Some(audio);
-				self.data_for_playing.bgm._current_sound = Some(sound);
-			}
-		} else {
-			if let Some(audio) = self.data_for_playing.bgm.current_audio.take() &&
-				let Some(sound) = self.data_for_playing.bgm._current_sound.take() {
-
-				audio.resume_sound();
-				self.data_for_playing.bgm.current_audio = Some(audio);
-				self.data_for_playing.bgm._current_sound = Some(sound);
-			}
-		}
+		let _ = play_audio_js("bgm_1").unwrap();
 
 		let _receiver = browser::set_class_name_by_id("right-top-area", "")
 			.expect("game : GameState : start_move() : error draw text");
@@ -1009,12 +987,9 @@ impl GameState<Playing> {
 		}
 	}
 
-	fn end_game(mut self) -> GameState<GameOver> {
-
-		if let Some(audio) = self.data_for_playing.bgm.current_audio.take() {
-			audio.suspend_sound();
-			self.data_for_playing.bgm.current_audio = Some(audio);
-		}
+	fn end_game(self) -> GameState<GameOver> {
+		
+		let _ = delete_audio_js("bgm_1").unwrap();
 
 		let _receiver = browser::set_class_name_by_id("game-over-area", "")
 			.expect("game : GameState<Playing> : end_game() : error draw text");
